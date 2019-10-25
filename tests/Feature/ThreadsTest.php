@@ -12,9 +12,9 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testBasicTest()
+    public function a_user_can_browse_threads()
     {
-        $response = $this->get('/');
+        $response = $this->get('/threads');
 
         $response->assertStatus(200);
     }
