@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
 {
+        public function __construct () 
+        {
+            $this->middleware('auth')->except(['index', 'show']);
+        }
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +29,7 @@ class ThreadsController extends Controller
      */
     public function create()
     {
-        //
+        return view('threads.create');
     }
 
     /**
@@ -36,7 +40,13 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $thread = Thread::create([
+           'user_id'=>auth()->id(),
+           'title' => request('title'),
+           'body' => request('body'),
+
+       ]);
+       return redirect($thread->path());
     }
 
     /**
