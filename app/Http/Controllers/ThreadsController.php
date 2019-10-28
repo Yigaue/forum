@@ -79,7 +79,10 @@ class ThreadsController extends Controller
      */
     public function show($channeld, Thread $thread)
     {
-        return view('threads.show', compact('thread'));
+        return view('threads.show', [
+            'thread'=> $thread,
+            'replies'=>$thread->replies()->paginate(20),
+        ]);
     }
 
     /**
