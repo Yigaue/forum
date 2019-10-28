@@ -22,7 +22,9 @@ class Thread extends Model
 
     public function replies()
     {
-    return $this->hasMany('App\Reply');
+    return $this->hasMany('App\Reply')
+        ->withCount('favorites')
+        ->with('owner');
 /* we could also write the class like this: Reply::class without the quotation and root folder(APP).
      Laravel automatically takes the model name(Thread) or parent table to create the foreign key(thread_id).
     if this is the not the case the foreign key key should be specify e.g ('App\Reply', 'custom_id') 

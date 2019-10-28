@@ -27,7 +27,7 @@
             <br/>
   
                 @foreach($replies as $reply)
-                @include('threads.replies')
+                @include('threads.reply')
                 @endforeach
                 {{$replies->links()}}
            
