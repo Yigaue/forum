@@ -16,6 +16,7 @@ class ThreadPolicy
      * @param  \App\User  $user
      * @return mixed
      */
+    
     public function viewAny(User $user)
     {
         //
