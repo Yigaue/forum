@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use App\Thread;
 
 class RepliesController extends Controller
-{       
+{
         public function __construct(){
             $this->middleware('auth');
         }
 
     public function store ($channelId, Thread $thread)
-    {       
-        
+    {
+
             $this->validate(request(),
              [
                 'body'=>'required',
@@ -23,6 +23,6 @@ class RepliesController extends Controller
                'user_id'=> auth()->id(),
            ]);
 
-           return back();
+           return back()->with('flash', 'Your replies has been sent');
     }
 }
