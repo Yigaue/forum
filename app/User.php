@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'email',
     ];
 
     /**
@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
     public function getRouteKeyName()
-   
+
     {
         return 'name';
     }
@@ -46,7 +46,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Thread::class)->latest();
     }
-    
+
     public function activity()
     {
         return $this->hasMany(Activity::class);

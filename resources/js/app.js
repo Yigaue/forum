@@ -20,7 +20,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('flash-component', require('./components/Flash.vue').default);
+Vue.component('flash-component', require('./components/FlashComponent.vue').default);
+Vue.component('thread-view', require('./pages/Thread.vue').default);
+Vue.component('paginator', require('./components/Paginator.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

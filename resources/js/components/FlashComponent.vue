@@ -18,15 +18,15 @@
         },
         created(){
             if(this.message){
-                this.appear(this.message)
+                this.flash(this.message)
             }
             window.events.$on('flash', message => this.flash(message));
             // window.events.$on('flash', message =>{
-            //     this.appear(message);
+            //     this.flash(message);
             // });
         },
         methods:{
-            appear(message){
+            flash(message){
                 this.body = message;
                 this.show = true;
                 this.hide();

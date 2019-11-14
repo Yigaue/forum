@@ -31,7 +31,7 @@ class Thread extends Model
     //    static::created(function ($thread){
     //     $thread -> recordActivity('created');
     //    });
-    
+
     /*
     The two methods below where moved into RecordActivity trait
     */
@@ -73,7 +73,7 @@ class Thread extends Model
 
     public function addReply($reply)
     {
-        $this->replies()->create($reply);
+        return $this->replies()->create($reply);
     }
     public function channel()
     {

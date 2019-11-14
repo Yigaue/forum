@@ -11,7 +11,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer>
-
+    window.App = {!! json_encode([
+    'csrfToken' => csrf_token(),
+     'signedIn' => Auth::check(),
+     'user'=>Auth::user(),
+    ])!! };
     </script>
 
     <!-- Fonts -->
@@ -24,6 +28,9 @@
         body{padding-bottom: 100px;}
         .level{display: flex; align-items: center; }
         .flex{flex:1;}
+        [v-cloak]{
+            display:none;
+        }
     </style>
 </head>
 <body>
