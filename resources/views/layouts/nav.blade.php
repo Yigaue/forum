@@ -4,7 +4,7 @@
                 {{-- {{ config('app.name', 'Forum') }} --}}
                 Forum
             </a>
-          
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -12,7 +12,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                        
+
 
                         <li class="dropdown nav-item">
                                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse
@@ -27,18 +27,20 @@
                                             </li>
                                             @endif
                                         <li><a class="nav-link" href="/threads?popular=1">Popular Threads</a></li>
+                                        <li><a class="nav-link" href="/threads?unanswered=1">Unanswered Threads</a></li>
+
                                      </ul>
-                            </li>   
+                            </li>
 
                         <li class="dropdown nav-item">
                             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Channels
                                 <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                      @foreach ($channels as $channel)
-                                    <li class="text-center"><a href="/threads/{{$channel->slug}}">{{$channel->name}}</a></li>  
+                                    <li class="text-center"><a href="/threads/{{$channel->slug}}">{{$channel->name}}</a></li>
                                     @endforeach
                                  </ul>
-                        </li>    
+                        </li>
                  </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -49,7 +51,7 @@
                             </li>
                     <!-- Authentication Links -->
                     @guest
-                    
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
@@ -60,7 +62,7 @@
                         @endif
                     @else
                         {{-- <li class="nav-item dropdown">
-                            
+
                         </li> --}}
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

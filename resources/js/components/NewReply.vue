@@ -1,6 +1,8 @@
 <template>
 <div>
     <div v-if="signedIn">
+
+
      <!-- @if(auth()->check()) -->
 
             <!-- <form method="post" action="{{$thread->path().'/replies'}}"> -->
@@ -18,8 +20,9 @@
                  </div>
              <!-- </form> -->
              <!-- @else -->
-                 <p class="text-center" v-else>
-                Please <a href="'/login">Sign in</a> to participate in the discussion</p>
+            <p class="text-center" v-else>
+
+                Please <a href="/login">Sign in</a> to participate in the discussion</p>
              <!-- @endif -->
 </div>
 

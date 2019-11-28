@@ -1,16 +1,15 @@
 <script>
-import RepliesComponent from  '../components/RepliesComponent.vue';
+import RepliesComponent from "../components/RepliesComponent.vue";
+import SubscribeButton from "../components/SubscribeButton.vue";
 
 export default {
+  props: ["initialRepliesCount"],
 
-    props: ['initialRepliesCount'],
-
-    components: {RepliesComponent},
-    data(){
-        return{
-            repliesCount:this.initialRepliesCount
-        };
-    }
-
-}
+  components: { RepliesComponent, SubscribeButton },
+  data() {
+    return {
+      repliesCount: this.initialRepliesCount
+    };
+  }
+};
 </script>

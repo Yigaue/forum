@@ -20,8 +20,8 @@
         </div>
         @endif -->
 
-         <div>
-         <!-- <div v-if="signedIn"> ////////Resurrect this guy after fixing the global bug issue///////-->
+       <!--  -->
+     <div v-if="signedIn">      <!-- ////////Resurrect this guy after fixing the global bug issue///////-->
 
             <favorite-component :reply="data"></favorite-component>
         </div>
@@ -43,8 +43,7 @@
 
                 </div>
 
-            <div class="card-footer level">
-            <!-- <div class="card-footer level" v-if="canUpdate">//////////////Resurrect this guy after fixing the global bug issue////////////////-->
+        <div class="card-footer level" v-if="canUpdate">      <!--//////////////Resurrect this guy after fixing the global bug issue//////////////// -->
 
              <button class="btn btn-secondary btn-sm mr-3" @click="editing = true">Edit</button>
              <button class="btn btn-danger btn-sm mr-3" @click="destroy">Delete</button>

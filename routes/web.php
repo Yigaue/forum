@@ -38,8 +38,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
  Route::patch('/replies/{reply}', 'RepliesController@update');
  Route::delete('/replies/{reply}', 'RepliesController@destroy');
+ Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionsController@store')->middleware('auth');
+ Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionsController@destroy')->middleware('auth');
+
 
  Route::post('/replies/{reply}/favorites', 'FavoritesController@store');
  Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy');
 
  Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
+ Route::get('/profiles/{user}/notifications', 'UserNotifcationsController@index');
+ Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotifcationsController@destroy');
+

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
@@ -9,12 +10,14 @@ class Thread extends Model
     use RecordsActivity;
     protected $guarded = [];
     protected $with = ['creator','channel'];
+    protected $appends = ['isSubscribedTo'];
     protected static function boot ()
     {
         parent::boot();
-        static::addGlobalScope('replyCount', function ($builder){
-            $builder->withCount('replies');
-        });
+
+        // static::addGlobalScope('replyCount', function ($builder){
+        //     $builder->withCount('replies');
+        // }); ///////// this was removed because we added a replies_count to the thread table
         static::deleting(function($thread){
             $thread ->replies->each->delete();
             /*
@@ -73,14 +76,67 @@ class Thread extends Model
 
     public function addReply($reply)
     {
-        return $this->replies()->create($reply);
+        $reply = $this->replies()->create($reply);
+
+
+   //prepare notifications for all subcribers
+   $this->subscriptions
+   ->filter(function ($sub) use ($reply){
+       return $sub->user_id != $reply->user_id;
+
+   })
+    ->each->notify($reply); // higher order collections method the alternative default long form is just below
+
+    // ->each(function ($sub) use ($reply){
+    //     $sub->notify ($reply);
+    // });
+
+
+    ////////  OR //////
+
+    //   $sub->user->notify(new ThreadWasUpdated($this, $reply));
+
+    // }); /// this was tranfer to ThreadSubcription, notifiy method. So we could chain
+    ///////// that relationship immediately above
+
+               return $reply;
     }
+
     public function channel()
     {
         return $this->belongsTo(Channel::class);
     }
-    public function scopeFilter($query, $filters)
+
+    public function scopeFilter($query, ThreadFilters $filters)
     {
         return $filters->apply($query);
+    }
+
+    public function subscribe($userId = null)
+    {
+        $this->subscriptions()->create([
+            'user_id' => $userId ?: auth()->id()
+        ]);
+            return $this;
+    }
+
+    public function unsubscribe($userId = null)
+    {
+        return $this->subscriptions()
+        ->where('user_id', $userId ? : auth()->id())
+        ->delete();
+    }
+
+    public function subscriptions()
+    {
+       return $this->hasMany(ThreadSubscription::class);
+
+    }
+
+    public function getIssubscribedToAttribute()
+    {
+        return $this->subscriptions()
+        ->where('user_id', auth()->id())
+        ->exists();
     }
 }

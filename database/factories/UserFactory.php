@@ -39,15 +39,16 @@ $factory->define(App\Thread::class, function($faker) {
     ];
 });
 
-$factory->define(App\Reply::class, function($faker){
+$factory->define(\Illuminate\Notifications\DatabaseNotification::class, function($faker){
         return [
-            'user_id'=> function(){
-                return factory('App\User')->create()->id;
+            'id' => \Ramsey\Uuid\Uuid::Uuid4()->toString(),
+            'type' =>'App\Notifications\ThreadWasUpdated',
+            'notifiable_id' => function(){
+                return auth()->id() ?: factory('App\User')-create()->id;
             },
-            'thread_id' =>function(){
-                return factory('App\Thread')->create()->id;
-            },
-            'body'=>$faker->sentence,
+
+            'notifiable_type' =>'App\User',
+            'data' => ['foo'=>'bar']
         ];
 });
 
